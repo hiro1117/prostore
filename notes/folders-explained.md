@@ -9,3 +9,11 @@
 ## shared folder
 
 - `shared` is for components that has other components inside of it.
+
+## components/ui
+
+- components/ui is auto-generated folder by shadcn/ui
+
+## prisma
+
+- prisma is auto-generated folder by `npx prisma init`
