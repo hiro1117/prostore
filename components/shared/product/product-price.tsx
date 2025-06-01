@@ -9,7 +9,7 @@ const ProductPrice = ({
   className?: string;
 }) => {
   // Ensure two decimal places
-  const stringValue = Number(value).toFixed(2);
+  const stringValue = value.toFixed(2);
   // Get the int and float parts
   const [intValue, floatValue] = stringValue.split(".");
 

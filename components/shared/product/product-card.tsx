@@ -1,15 +1,15 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 // TODO - the above code need to deleted later
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import Link from "next/link";
 import Image from "next/image";
 import ProductPrice from "./product-price";
+import { Product } from "@/types";
 
-const ProductCard = ({ product }: { product: any }) => {
+const ProductCard = ({ product }: { product: Product }) => {
   return (
     <Card className="w-full max-w-sm">
       <CardHeader className="p-0 items-center">
-        <Link href={`/product/${product.id}`}>
+        <Link href={`/product/${product.slug}`}>
           <Image
             src={product.images[0]}
             alt={product.name}
@@ -29,7 +29,7 @@ const ProductCard = ({ product }: { product: any }) => {
           {product.stock > 0 ? (
             // <ProductPrice value={product.price} className="text-red-500" />
             // Note:style - the above code is used to show the price in red color.
-            <ProductPrice value={product.price} />
+            <ProductPrice value={Number(product.price)} />
           ) : (
             <p className="text-destructive">Out of stock</p>
           )}
