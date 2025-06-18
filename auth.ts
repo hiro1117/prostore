@@ -39,13 +39,13 @@ export const config: NextAuthConfig = {
 
         // Check if user exists and if the password matches with what the user has entered and what is in the database
         if (user && user.password) {
-          const isMath = compareSync(
+          const isMatch = compareSync(
             credentials.password as string,
             user.password
           );
 
           // if password matches, return the user object
-          if (isMath) {
+          if (isMatch) {
             return {
               id: user.id,
               name: user.name,
