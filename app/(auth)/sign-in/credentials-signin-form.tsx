@@ -2,13 +2,19 @@
 
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
-import { signInDefaultValues } from "@/lib/constants";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import { signInWithCredentials } from "@/lib/actions/user.actions";
+import { useActionState } from "react";
 
 const CredentialsSigninForm = () => {
+  const [data, action, isPending] = useActionState(signInWithCredentials, {
+    success: false,
+    message: "",
+  });
+
   return (
-    <form>
+    <form action={action}>
       <div className="space-y-6">
         <div>
           <Label htmlFor="email">Email</Label>
@@ -18,18 +24,26 @@ const CredentialsSigninForm = () => {
             type="email"
             required
             autoCapitalize="email"
-            defaultValue={signInDefaultValues.email}
           />
         </div>
         <div>
           <Label htmlFor="password">Password</Label>
-          <Input id="password" name="password" type="password" required />
+          <Input
+            id="password"
+            name="password"
+            type="password"
+            required
+            maxLength={100}
+          />
         </div>
         <div>
-          <Button className="w-full" variant="default">
-            Sign In
+          <Button disabled={isPending} className="w-full" variant="default">
+            {isPending ? "Signing in..." : "Sign In"}
           </Button>
         </div>
+        {data && !data.success && (
+          <div className="text-center text-destructive">{data.message}</div>
+        )}
         <div className="text-sm text-center text-muted-foreground">
           Don&apos;t have an account?{" "}
           <Link href="/sign-up" className="text-primary underline">
